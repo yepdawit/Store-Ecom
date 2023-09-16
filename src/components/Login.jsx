@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { loginUser } from "../api/api";
 
 const Login = () => {
@@ -8,8 +8,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await loginUser({ username, password });
-      localStorage.setItem("isLogged", true);
+      await loginUser(username, password);
+      localStorage.setItem("LoggedIn", true);
       window.location = "/";
     } catch (error) {
       alert("Invalid username or password");
