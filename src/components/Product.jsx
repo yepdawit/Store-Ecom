@@ -1,20 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-const Product = ({ products, addToCart }) => {
-  const navigate = useNavigate();
+
+const Product = ({ product, addToCart }) => {
   return (
     <div>
-      {products.map((product) => (
-        <div key={product.id} className="product">
-          <h3 onClick={() => navigate(`/products/${product.id}`)}>
-            {product.title}
-          </h3>
-          <h4 className="price">${product.price}</h4>
-          <img src={product.image} alt={product.title} />
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
-        </div>
-      ))}
+      <img src={product.image} alt={product.title} />
+      <h2>{product.title}</h2>
+      <p>{product.description}</p>
+      <p>Price: ${product.price}</p>
+      <button onClick={() => addToCart(product)}>Add to Cart</button>
     </div>
   );
 };
+
 export default Product;

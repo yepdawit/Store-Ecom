@@ -1,29 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
-import Product from "./components/Product";
 import { getProducts } from "./api/api";
 import Login from "./components/Login";
+import Home from "./components/Home";
+import AllProducts from "./components/AllProducts";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  const LoggedIn = localStorage.getItem("LoggedIn");
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const fetchedProducts = await getProducts();
-      setProducts(fetchedProducts);
+      try {
+        const fetchedProducts = await getProducts();
+        if (fetchedProducts) {
+          setProducts(fetchedProducts);
+        }
+      } catch (error) {
+        console.error("Could not fetch products", error);
+      }
     };
     fetchProducts();
   }, []);
+
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    // Check if the product is already in the cart
+    const productExists = cart.some((cartItem) => cartItem.id === product.id);
+
+    // Only add the product if it doesn't already exist in the cart
+    if (!productExists) {
+      setCart([...cart, product]);
+    }
   };
+
   const removeFromCart = (productToRemove) => {
-    setCart(cart.filter((product) => product !== productToRemove));
+    setCart(cart.filter((product) => product.id !== productToRemove.id));
   };
+
   return (
     <Router>
       <NavBar />
@@ -31,25 +46,17 @@ const App = () => {
         <Route
           exact
           path="/"
-          element={isAuthenticated ? <Home /> : <Redirect to="/login" />}
+          element={<Home products={products} addToCart={addToCart} />}
         />
-        <Route
-          path="/login"
-          element={!isAuthenticated ? <Login /> : <Redirect to="/" />}
-        />
+        <Route exact path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/products"
-          element={isAuthenticated ? <AllProducts /> : <Redirect to="/login" />}
+          element={<AllProducts products={products} addToCart={addToCart} />}
         />
         <Route
           path="/cart"
-          element={
-            isAuthenticated ? (
-              <Cart cart={cart} removeFromCart={removeFromCart} />
-            ) : (
-              <Redirect to="/login" />
-            )
-          }
+          element={<Cart cart={cart} removeFromCart={removeFromCart} />}
         />
       </Routes>
     </Router>
