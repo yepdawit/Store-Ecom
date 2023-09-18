@@ -1,9 +1,33 @@
 const api_url = "http://fakestoreapi.com";
 
 // Get all products
-export const getProducts = async () => {
+export const getProducts = async (limit, sort) => {
   try {
-    const response = await fetch(`${api_url}/products`);
+    const url = new URL(`${api_url}/products`);
+    const params = { limit, sort };
+    url.search = new URLSearchParams(params).toString();
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching products: ", error);
+  }
+};
+
+// Get product from specific category
+export const getProductsByCategory = async (category, limit, sort) => {
+  try {
+    const url = new URL(`${api_url}/products/category/${category}`);
+    const params = { limit, sort };
+    url.search = new URLSearchParams(params).toString();
+
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

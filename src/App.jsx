@@ -5,7 +5,6 @@ import Cart from "./components/Cart";
 import { getProducts, getCategories } from "./api/api";
 import Login from "./components/Login";
 import Home from "./components/Home";
-import AllProducts from "./components/AllProducts";
 import Register from "./components/Register";
 import CategoryPage from "./components/CategoryPage";
 
@@ -13,11 +12,15 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [limit, setLimit] = useState(null);
+  const [sort, setSort] = useState(null);
+
+  [];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedProducts = await getProducts();
+        const fetchedProducts = await getProducts(limit, sort);
         setProducts(fetchedProducts);
         const fetchedCategories = await getCategories();
         setCategories(fetchedCategories);
@@ -29,6 +32,8 @@ const App = () => {
   }, []);
 
   const addToCart = (product) => {
+    console.log("Current cart:", cart);
+    console.log("add to cart called, product:", product);
     setCart([...cart, product]);
   };
 
@@ -53,9 +58,10 @@ const App = () => {
         />
         <Route path="/login" element={<Login />} />
         <Route
-          path="/products"
-          element={<AllProducts products={products} addToCart={addToCart} />}
+          path="/category/:categoryName"
+          element={<CategoryPage products={products} addToCart={addToCart} />}
         />
+
         <Route
           path="/cart"
           element={<Cart cart={cart} removeFromCart={removeFromCart} />}
