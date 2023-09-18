@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Product = ({ product, addToCart }) => {
+  console.log("Inside Product component, addToCart:", addToCart);
+
+  useEffect(() => {
+    console.log("New props in Product:", { product, addToCart });
+  }, [product, addToCart]);
+
   return (
     <div>
       <img src={product.image} alt={product.title} />
@@ -10,6 +16,10 @@ const Product = ({ product, addToCart }) => {
       <button onClick={() => addToCart(product)}>Add to Cart</button>
     </div>
   );
+};
+
+Product.defaultProps = {
+  addToCart: () => console.error("addToCart function not provided"),
 };
 
 export default Product;
