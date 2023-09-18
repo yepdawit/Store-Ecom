@@ -2,53 +2,55 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
-import { getProducts } from "./api/api";
+import { getProducts, getCategories } from "./api/api";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import AllProducts from "./components/AllProducts";
+import Register from "./components/Register";
+import CategoryPage from "./components/CategoryPage";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
         const fetchedProducts = await getProducts();
-        if (fetchedProducts) {
-          setProducts(fetchedProducts);
-        }
+        setProducts(fetchedProducts);
+        const fetchedCategories = await getCategories();
+        setCategories(fetchedCategories);
       } catch (error) {
-        console.error("Could not fetch products", error);
+        console.error("error fetching data", error);
       }
     };
-    fetchProducts();
+    fetchData();
   }, []);
 
   const addToCart = (product) => {
-    // Check if the product is already in the cart
-    const productExists = cart.some((cartItem) => cartItem.id === product.id);
-
-    // Only add the product if it doesn't already exist in the cart
-    if (!productExists) {
-      setCart([...cart, product]);
-    }
+    setCart([...cart, product]);
   };
 
   const removeFromCart = (productToRemove) => {
     setCart(cart.filter((product) => product.id !== productToRemove.id));
   };
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    window.location.reload();
+  }
+
   return (
     <Router>
-      <NavBar />
+      <NavBar categories={categories} />
       <Routes>
         <Route
           exact
           path="/"
           element={<Home products={products} addToCart={addToCart} />}
         />
-        <Route exact path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/products"
@@ -57,6 +59,11 @@ const App = () => {
         <Route
           path="/cart"
           element={<Cart cart={cart} removeFromCart={removeFromCart} />}
+        />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/category/:categoryName"
+          element={<CategoryPage products={products} />}
         />
       </Routes>
     </Router>

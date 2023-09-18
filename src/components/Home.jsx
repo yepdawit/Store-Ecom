@@ -5,9 +5,13 @@ const Home = ({ products, addToCart }) => {
   return (
     <div>
       <h1>Home Page</h1>
-      {products.map((product) => (
-        <Product key={product.id} product={product} addToCart={addToCart} />
-      ))}
+      {products ? (
+        products.map((product) => (
+          <Product key={product.id} product={product} addToCart={addToCart} />
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
