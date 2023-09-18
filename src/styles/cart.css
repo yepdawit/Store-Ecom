@@ -1,0 +1,29 @@
+h1 {
+  color: #333;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+button {
+  background-color: #008cba;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button.remove {
+  background-color: #f44336;
+}
+
+button i.fa {
+  margin-right: 5px;
+}

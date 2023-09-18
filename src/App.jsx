@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import CategoryPage from "./components/CategoryPage";
+import Checkout from "./components/Checkout";
+import "font-awesome/css/font-awesome.min.css";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -35,13 +37,29 @@ const App = () => {
   }, []);
 
   const addToCart = (product) => {
-    console.log("Current cart:", cart);
-    console.log("add to cart called, product:", product);
-    setCart([...cart, product]);
+    const existingProduct = cart.find((item) => item.id === product.id);
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+      setCart([...cart]);
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
   };
 
   const removeFromCart = (productToRemove) => {
     setCart(cart.filter((product) => product.id !== productToRemove.id));
+  };
+
+  const updateQuantity = (product, amount) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    if (existingProduct) {
+      existingProduct.quantity += amount;
+      if (existingProduct.quantity <= 0) {
+        removeFromCart(product);
+      } else {
+        setCart([...cart]);
+      }
+    }
   };
 
   const handleLogin = (username) => {
@@ -75,9 +93,18 @@ const App = () => {
 
         <Route
           path="/cart"
-          element={<Cart cart={cart} removeFromCart={removeFromCart} />}
+          element={
+            <Cart
+              cart={cart}
+              loggedInUser={loggedInUser}
+              removeFromCart={removeFromCart}
+              updateQuantity={updateQuantity}
+            />
+          }
         />
+
         <Route path="/register" element={<Register />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route
           path="/category/:categoryName"
           element={<CategoryPage products={products} />}
