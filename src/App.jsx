@@ -14,6 +14,9 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [limit, setLimit] = useState(null);
   const [sort, setSort] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(
+    localStorage.getItem("username")
+  );
 
   [];
 
@@ -41,22 +44,30 @@ const App = () => {
     setCart(cart.filter((product) => product.id !== productToRemove.id));
   };
 
-  function handleLogout() {
-    localStorage.removeItem("token");
+  const handleLogin = (username) => {
+    localStorage.setItem("username", username);
+    setLoggedInUser(username);
+  };
+
+  const handleLogout = () => {
     localStorage.removeItem("username");
-    window.location.reload();
-  }
+    setLoggedInUser(null);
+  };
 
   return (
     <Router>
-      <NavBar categories={categories} />
+      <NavBar
+        categories={categories}
+        loggedInUser={loggedInUser}
+        handleLogout={handleLogout}
+      />
       <Routes>
         <Route
           exact
           path="/"
           element={<Home products={products} addToCart={addToCart} />}
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
           path="/category/:categoryName"
           element={<CategoryPage products={products} addToCart={addToCart} />}

@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { loginUser } from "../api/api";
 
-const Login = () => {
+const Login = ({ handleLogin: handleUserLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await loginUser(username, password);
       localStorage.setItem("LoggedIn", true);
+      if (handleUserLogin) {
+        handleUserLogin(username);
+      }
+
       window.location = "/";
     } catch (error) {
       alert("Invalid username or password");
@@ -18,7 +22,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="username"
