@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../api/api";
+import "../styles/login.css";
 
 const Login = ({ handleLogin: handleUserLogin }) => {
   const [username, setUsername] = useState("");
@@ -21,8 +22,8 @@ const Login = ({ handleLogin: handleUserLogin }) => {
   };
 
   return (
-    <div className="login">
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="username"

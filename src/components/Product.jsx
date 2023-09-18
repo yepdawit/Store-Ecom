@@ -8,7 +8,7 @@ const Product = ({ product, addToCart }) => {
   }, [product, addToCart]);
 
   return (
-    <div>
+    <div className="product-card">
       <img src={product.image} alt={product.title} />
       <h2>{product.title}</h2>
       <p>{product.description}</p>

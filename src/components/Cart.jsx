@@ -1,15 +1,36 @@
 import React from "react";
+import "../styles/cart.css";
 
-const Cart = ({ cart, removeFromCart }) => {
+const Cart = ({ cart, removeFromCart, updateQuantity, loggedInUser }) => {
   return (
-    <div>
-      <h1>Your Cart</h1>
+    <div className="cart-container">
+      <h1 className="cart-heading">Your Cart</h1>
       <ul>
         {cart.map((product, index) => (
-          // Append index to make sure the key is unique
           <li key={`${product.id}-${index}`}>
-            {product.title}
-            <button onClick={() => removeFromCart(product)}>Remove</button>
+            <img src={product.image} alt={product.title} />
+            <div className="cart-item-details">
+              <h2>{product.title}</h2>
+              <p>{product.description}</p>
+            </div>
+            <div>
+              <button
+                className="cart-item-quantity"
+                onClick={() => updateQuantity(product, -1)}
+              >
+                -
+              </button>
+              <span>{product.quantity}</span>
+              <button
+                className="cart-item-quantity"
+                onClick={() => updateQuantity(product, 1)}
+              >
+                +
+              </button>
+            </div>
+            <button onClick={() => removeFromCart(product)}>
+              <i className="fa fa-trash"></i> Remove
+            </button>
           </li>
         ))}
       </ul>

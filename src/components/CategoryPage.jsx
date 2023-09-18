@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Product from "./Product";
 import { getProductsByCategory } from "../api/api";
+import "../styles/categorypage.css";
 
 const CategoryPage = ({ addToCart }) => {
   const { categoryName } = useParams();
@@ -27,8 +28,8 @@ const CategoryPage = ({ addToCart }) => {
   }, [categoryName, limit, sort]);
 
   return (
-    <div>
-      <h1>{categoryName.replace("-", " ")}</h1>
+    <div className="category-container">
+      <h1 className="category-heading">{categoryName.replace("-", " ")}</h1>
       <ul>
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
