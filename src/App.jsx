@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Register from "./components/Register";
 import CategoryPage from "./components/CategoryPage";
 import Checkout from "./components/Checkout";
+import ProductDetails from "./components/ProductDetails";
 import "font-awesome/css/font-awesome.min.css";
 
 const App = () => {
@@ -37,6 +38,8 @@ const App = () => {
   }, []);
 
   const addToCart = (product) => {
+    console.log('product to add to cart:', product);
+
     const existingProduct = cart.find((item) => item.id === product.id);
     if (existingProduct) {
       existingProduct.quantity += 1;
@@ -108,6 +111,10 @@ const App = () => {
         <Route
           path="/category/:categoryName"
           element={<CategoryPage products={products} />}
+        />
+        <Route
+          path="/product/:productId"
+          element={<ProductDetails addToCart={addToCart} />}
         />
       </Routes>
     </Router>

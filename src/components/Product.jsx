@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Product = ({ product, addToCart }) => {
   console.log("Inside Product component, addToCart:", addToCart);
@@ -14,6 +15,7 @@ const Product = ({ product, addToCart }) => {
       <p>{product.description}</p>
       <p>Price: ${product.price}</p>
       <button onClick={() => addToCart(product)}>Add to Cart</button>
+      <Link to={`/product/${product.id}`}>Details</Link>
     </div>
   );
 };
