@@ -105,3 +105,26 @@ export async function getCategories() {
     console.error("Error getting categories: ", error);
   }
 }
+
+// Get a single product by ID
+
+export const getProductById = async (id) => {
+  try {
+    const response = await fetch(`${api_url}/products/${id}`);
+
+    if (!response.ok) {
+      const rawText = await response.text();
+      console.error(`Bad response: ${response.status} ${rawText}`);
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (!data || typeof data !== "object") {
+      throw new Error("Invalid JSON data received");
+    }
+    return data;
+  } catch (error) {
+    console.error("Error fetching product by ID: ", error);
+    console.error("Product ID:", id);
+  }
+};
