@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { registerUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
+
 function Register() {
-  // Initialize state variables
+
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -13,16 +14,15 @@ function Register() {
     password: "",
   });
 
-  // Initialize navigation
+
   const navigate = useNavigate();
 
-  // Handle changes to input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

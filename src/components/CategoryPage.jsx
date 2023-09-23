@@ -1,31 +1,23 @@
-// CategoryPage.jsx
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Product from "./Product";
 import { getProductsByCategory } from "../api/api";
-import "../styles/categorypage.css";
 
 const CategoryPage = ({ addToCart }) => {
   const { categoryName } = useParams();
   const [filteredProducts, setFilteredProducts] = React.useState([]);
-  const [limit, setLimit] = React.useState(10);
-  const [sort, setSort] = React.useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedProducts = await getProductsByCategory(
-          categoryName,
-          limit,
-          sort
-        );
+        const fetchedProducts = await getProductsByCategory(categoryName);
         setFilteredProducts(fetchedProducts);
       } catch (error) {
         console.error("error fetching data", error);
       }
     };
     fetchData();
-  }, [categoryName, limit, sort]);
+  }, [categoryName]);
 
   return (
     <div className="category-container">

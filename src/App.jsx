@@ -10,23 +10,20 @@ import CategoryPage from "./components/CategoryPage";
 import Checkout from "./components/Checkout";
 import ProductDetails from "./components/ProductDetails";
 import "font-awesome/css/font-awesome.min.css";
+import "../src/App.css";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [limit, setLimit] = useState(null);
-  const [sort, setSort] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(
     localStorage.getItem("username")
   );
 
-  [];
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedProducts = await getProducts(limit, sort);
+        const fetchedProducts = await getProducts();
         setProducts(fetchedProducts);
         const fetchedCategories = await getCategories();
         setCategories(fetchedCategories);
@@ -38,7 +35,7 @@ const App = () => {
   }, []);
 
   const addToCart = (product) => {
-    console.log('product to add to cart:', product);
+    console.log("product to add to cart:", product);
 
     const existingProduct = cart.find((item) => item.id === product.id);
     if (existingProduct) {
