@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { loginUser } from "../api/api";
-import "../styles/login.css";
 
 const Login = ({ handleLogin: handleUserLogin }) => {
   const [username, setUsername] = useState("");
