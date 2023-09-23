@@ -1,4 +1,4 @@
-const api_url = "http://fakestoreapi.com";
+const api_url = "https://fakestoreapi.com";
 
 // Get all products
 export const getProducts = async (limit, sort) => {
