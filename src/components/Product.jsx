@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Product = ({ product, addToCart }) => {
-  useEffect(() => {
-    console.log("New props in Product:", { product, addToCart });
-  }, [product, addToCart]);
+  useEffect(() => {}, [product, addToCart]);
 
   return (
     <div className="product-card">
