@@ -13,6 +13,11 @@ const Cart = ({ cart, removeFromCart, updateQuantity }) => {
   };
 
   const handleCheckout = () => {
+    if (!localStorage.getItem("LoggedInToken")) {
+      alert("Please login to checkout!");
+      navigate("/login");
+      return;
+    }
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);

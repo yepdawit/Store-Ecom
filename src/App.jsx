@@ -34,9 +34,20 @@ const App = () => {
     fetchData();
   }, []);
 
-  const addToCart = (product) => {
-    console.log("product to add to cart:", product);
+  // load cart from local storage
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
 
+  // save cart to local storage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (product) => {
     const existingProduct = cart.find((item) => item.id === product.id);
     if (existingProduct) {
       existingProduct.quantity += 1;
@@ -68,7 +79,12 @@ const App = () => {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem("LoggedInToken");
+    localStorage.removeItem("userId");
     localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    setCart([]);
+
     setLoggedInUser(null);
   };
 
@@ -85,12 +101,16 @@ const App = () => {
           path="/"
           element={<Home products={products} addToCart={addToCart} />}
         />
+        <Route
+          path="/checkout"
+          element={<Checkout isLoggedIn={Boolean(loggedInUser)} cart={cart} />}
+        />
+
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route
           path="/category/:categoryName"
           element={<CategoryPage products={products} addToCart={addToCart} />}
         />
-
         <Route
           path="/cart"
           element={
@@ -104,11 +124,6 @@ const App = () => {
         />
 
         <Route path="/register" element={<Register />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route
-          path="/category/:categoryName"
-          element={<CategoryPage products={products} />}
-        />
         <Route
           path="/product/:productId"
           element={<ProductDetails addToCart={addToCart} />}

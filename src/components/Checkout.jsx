@@ -1,77 +1,52 @@
 import React, { useState } from "react";
 
-const Checkout = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [zip, setZip] = useState("");
-  const [country, setCountry] = useState("");
+const Checkout = ({ isLoggedIn, cart }) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    cart.forEach((product) => {
+      totalPrice += product.price * product.quantity;
+    });
+    return totalPrice.toFixed(2);
   };
+
+  const handleSubmit = () => {
+    setIsSubmitted(true);
+  };
+
+  if (!isLoggedIn) {
+    return <h1>Please login to checkout</h1>;
+  }
+
+  if (isSubmitted) {
+    return (
+      <div>
+        <h1>Thank you for your purchase!</h1>
+        <p>
+          You will receive an email confirmation shortly with your order
+          details.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div>
       <h1>Checkout</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Address:
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          City:
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Zip:
-          <input
-            type="text"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Country:
-          <input
-            type="text"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Confirm Purchase</button>
-      </form>
+      <ul>
+        {cart.map((product, index) => (
+          <li key={`${product.id}-${index}`}>
+            <span>{product.title}</span> -
+            <span>Quantity: {product.quantity}</span> -
+            <span>Total: ${(product.price * product.quantity).toFixed(2)}</span>
+          </li>
+        ))}
+      </ul>
+      <div>
+        <p>Total: ${calculateTotalPrice()}</p>
+        <button onClick={handleSubmit}>Confirm Purchase</button>
+      </div>
     </div>
   );
 };
