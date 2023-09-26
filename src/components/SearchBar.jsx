@@ -18,8 +18,9 @@ const SearchBar = ({ products, setFilteredProducts }) => {
   };
 
   return (
-    <div>
+    <div className="Search-bar">
       <input
+        className="search-input"
         type="text"
         placeholder="Search for products..."
         value={searchTerm}

@@ -22,7 +22,7 @@ const CategoryPage = ({ addToCart }) => {
   return (
     <div className="category-container">
       <h1 className="category-heading">{categoryName.replace("-", " ")}</h1>
-      <ul>
+      <ul className="filter">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <Product key={product.id} product={product} addToCart={addToCart} />
