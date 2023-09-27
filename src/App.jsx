@@ -95,40 +95,51 @@ const App = () => {
         loggedInUser={loggedInUser}
         handleLogout={handleLogout}
       />
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={<Home products={products} addToCart={addToCart} />}
-        />
-        <Route
-          path="/checkout"
-          element={<Checkout isLoggedIn={Boolean(loggedInUser)} cart={cart} />}
-        />
-
-        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        <Route
-          path="/category/:categoryName"
-          element={<CategoryPage products={products} addToCart={addToCart} />}
-        />
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              cart={cart}
-              loggedInUser={loggedInUser}
-              removeFromCart={removeFromCart}
-              updateQuantity={updateQuantity}
+      <div className="canvas">
+        <div className="canvas-div">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={<Home products={products} addToCart={addToCart} />}
             />
-          }
-        />
+            <Route
+              path="/checkout"
+              element={
+                <Checkout isLoggedIn={Boolean(loggedInUser)} cart={cart} />
+              }
+            />
 
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/product/:productId"
-          element={<ProductDetails addToCart={addToCart} />}
-        />
-      </Routes>
+            <Route
+              path="/login"
+              element={<Login handleLogin={handleLogin} />}
+            />
+            <Route
+              path="/category/:categoryName"
+              element={
+                <CategoryPage products={products} addToCart={addToCart} />
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  cart={cart}
+                  loggedInUser={loggedInUser}
+                  removeFromCart={removeFromCart}
+                  updateQuantity={updateQuantity}
+                />
+              }
+            />
+
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/product/:productId"
+              element={<ProductDetails addToCart={addToCart} />}
+            />
+          </Routes>
+        </div>
+      </div>
     </Router>
   );
 };

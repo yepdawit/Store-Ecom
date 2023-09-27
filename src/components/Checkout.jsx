@@ -26,13 +26,22 @@ const Checkout = ({ isLoggedIn, cart }) => {
         <p>
           You will receive an email confirmation shortly with your order
           details.
+          <style>
+            {`
+            p {
+              font-size: 1.5rem;
+              margin-top: 2rem;
+              text-align: center;
+            }
+          `}
+          </style>
         </p>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="checkout-container">
       <h1>Checkout</h1>
       <ul>
         {cart.map((product, index) => (
@@ -43,7 +52,7 @@ const Checkout = ({ isLoggedIn, cart }) => {
           </li>
         ))}
       </ul>
-      <div>
+      <div className="checkout-div">
         <p>Total: ${calculateTotalPrice()}</p>
         <button onClick={handleSubmit}>Confirm Purchase</button>
       </div>

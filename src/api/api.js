@@ -55,13 +55,28 @@ export async function loginUser(username, password) {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      let errorMessage;
+      switch (response.status) {
+        case 401:
+          errorMessage = "Invalid username or password";
+          break;
+        default:
+          try {
+            const errorData = await response.json();
+            errorMessage =
+              errorData.message || `HTTP error! Status: ${response.status}`;
+          } catch (jsonError) {
+            errorMessage =
+              response.statusText || `HTTP error! Status: ${response.status}`;
+          }
+      }
+      throw new Error(errorMessage);
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error("Error logging in: ", error);
+    throw error;
   }
 }
 
