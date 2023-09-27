@@ -1,0 +1,259 @@
+/* color guide
+ 
+ .first-color { 
+	background: #e7eaf6; 
+}
+	
+.second-color { 
+	background: #a2a8d3; 
+}
+
+.third-color { 
+	background: #38598b; 
+}
+
+.fourth-color { 
+	background: #113f67; 
+}
+
+ */
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  box-shadow: rgba(155, 155, 160, 0.776) 0px 0px 10px;
+  background-color: rgb(255, 255, 255);
+  margin: 1rem;
+  padding: 2rem;
+  border-radius: 10px;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem;
+}
+.category-container,
+.filter {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.navbar {
+  display: flex;
+  flex: 0 0 100%;
+  position: static;
+  float: none;
+  height: 65px;
+  background: #113f67;
+  white-space: nowrap;
+  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+}
+.navbar {
+  margin-left: 10px;
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  color: #9cf8de;
+}
+
+.navbar a {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  text-align: justify;
+}
+.user span {
+  margin-right: 10px;
+}
+
+.navbar > div:last-child span {
+  margin-right: 5px;
+}
+
+.cart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.search-input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 1rem;
+  margin: 0 1rem;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.sort-select {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 1rem;
+  margin: 0 1rem;
+}
+.sort-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.login-container,
+.register-container {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 400px;
+  margin: 40px auto;
+  border-radius: 5px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form input,
+.register-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.simple-button,
+.login-form button {
+  background-color: #38598b;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.simple-button:hover,
+.login-form button:hover {
+  background-color: #a2a8d3;
+}
+
+.error,
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.register-container {
+  padding: 30px;
+}
+
+.register-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.register-inputs {
+  margin-top: 5px;
+}
+
+h2 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.checkout-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li span {
+  font-size: 16px;
+  color: #555;
+}
+
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-top: 2px solid #007bff;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #38598b;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #a2a8d3;
+}
+
+button:disabled {
+  background-color: #e7eaf6;
+  cursor: not-allowed;
+}

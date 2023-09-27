@@ -9,11 +9,13 @@ const NavBar = ({ categories, loggedInUser, handleLogout }) => {
         <Link to="/cart">Cart</Link>
       </div>
 
-      <div>
+      <div className="user">
         {loggedInUser ? (
           <>
             <span>Hello, {loggedInUser}</span>
-            <button onClick={handleLogout}>Logout</button>
+            <Link to="/" onClick={handleLogout}>
+              Logout
+            </Link>
           </>
         ) : (
           <>

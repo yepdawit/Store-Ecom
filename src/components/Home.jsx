@@ -25,7 +25,7 @@ const Home = ({ products, addToCart }) => {
   };
 
   return (
-    <div>
+    <div className="home-container">
       <h1>Home Page</h1>
       <SearchBar
         products={products}
@@ -34,6 +34,7 @@ const Home = ({ products, addToCart }) => {
       <div className="sort-container">
         <label htmlFor="sort">Sort by:</label>
         <select
+          className="sort-select"
           name="sort"
           id="sort"
           value={sortType}
