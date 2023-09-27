@@ -9,7 +9,10 @@ const Login = ({ handleLogin: handleUserLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginUser(username, password);
+      const data = await loginUser(username, password);
+      if (!data || !data.token) {
+        throw new Error("invalid username or password");
+      }
       localStorage.setItem("LoggedInToken", true);
       if (handleUserLogin) {
         handleUserLogin(username);
@@ -17,7 +20,7 @@ const Login = ({ handleLogin: handleUserLogin }) => {
 
       window.location = "/";
     } catch (error) {
-      setError("Invalid username or password");
+      setError(error.message);
     }
   };
 

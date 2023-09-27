@@ -4,7 +4,6 @@ import { getProductById } from "../api/api"; // Import the new function
 
 const ProductDetails = ({ addToCart }) => {
   const { productId } = useParams();
-  console.log("product if from params", productId);
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
