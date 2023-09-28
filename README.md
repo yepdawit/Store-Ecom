@@ -1,9 +1,8 @@
 # Project Plan for E-Commerce App
 > Documentation and Project Management
 
-  - Create a GitHub repository for the project.
- - Write a comprehensive README for project setup and usage.
- - Set up a project board with task tracking.
+- [x] Create a GitHub repository for the project.
+  - [x] Set up a project board with task tracking.
  - API - `https://fakestoreapi.com/`
 ## Tier 1: MVP
 ### Front end setup
