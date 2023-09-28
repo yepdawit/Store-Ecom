@@ -11,7 +11,7 @@ const Product = ({ product, addToCart }) => {
       <p>Price: ${product.price}</p>
       <button onClick={() => addToCart(product)}>Add to Cart</button>
       <Link to={`/product/${product.id}`}>
-        <button>See Details</button>
+        <button style={{ margin: "10px" }}>See Details</button>
       </Link>
     </div>
   );
