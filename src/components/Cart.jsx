@@ -11,6 +11,10 @@ const Cart = ({ cart, removeFromCart, updateQuantity }) => {
     });
     return totalPrice.toFixed(2);
   };
+  const totalItems = cart.reduce(
+    (total, product) => total + product.quantity,
+    0
+  );
 
   const handleCheckout = () => {
     if (!localStorage.getItem("LoggedInToken")) {
@@ -27,7 +31,7 @@ const Cart = ({ cart, removeFromCart, updateQuantity }) => {
 
   return (
     <div className="cart-container">
-      <h1 className="cart-heading">Your Cart</h1>
+      <h1 className="cart-heading">Your Cart ({totalItems} items)</h1>
       {cart.length === 0 ? (
         <p>Your cart is empty</p>
       ) : (

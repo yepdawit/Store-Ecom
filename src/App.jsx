@@ -9,7 +9,6 @@ import Register from "./components/Register";
 import CategoryPage from "./components/CategoryPage";
 import Checkout from "./components/Checkout";
 import ProductDetails from "./components/ProductDetails";
-import "font-awesome/css/font-awesome.min.css";
 import "../src/App.css";
 
 const App = () => {
