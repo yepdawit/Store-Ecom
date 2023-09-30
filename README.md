@@ -1,10 +1,13 @@
 # Project Plan for E-Commerce App
+
 > Documentation and Project Management
 
 - [x] Create a GitHub repository for the project.
   - [x] Set up a project board with task tracking.
- - API - `https://fakestoreapi.com/`
+- API - `https://fakestoreapi.com/`
+
 ## Tier 1: MVP
+
 ### Front end setup
 
 - [x] Create a new front-end application from scratch or use the starter.
@@ -23,7 +26,9 @@
 - [x] Implement a persistent shopping cart.
 - [x] Enable cart editing (change quantity, remove items).
 - [x] Create a checkout process with a confirmation page.
+
 ## Tier 2: E-Commerce Stretch
+
 - ## Device Compatibility and Accessibility
 
 - [ ] Ensure the website is responsive and usable on all device types.
@@ -31,6 +36,7 @@
 - [ ] Implement accessibility features (screen-reader friendliness, keyboard navigation, colorblind-friendly).
 - [ ] Show loading indicators during data retrieval.
 - [x] Handle errors gracefully and provide feedback to users.
+
   - ## Enhance Shopping Cart Functionality
 
 - [ ] Enable cart synchronization across different devices for logged-in users (requires a backend).
@@ -45,9 +51,9 @@
 - [ ] Associate reviews with the correct user (requires backend).
 - ## User Account Features
 
- - [ ] Implement session management to keep users logged in across sessions (requires backend).
- - [ ] Create a user profile page for updating personal information (requires backend).
- - [ ] Implement order history to display past purchases with prices (requires backend).
+- [ ] Implement session management to keep users logged in across sessions (requires backend).
+- [ ] Create a user profile page for updating personal information (requires backend).
+- [ ] Implement order history to display past purchases with prices (requires backend).
 
 ## How to
 
