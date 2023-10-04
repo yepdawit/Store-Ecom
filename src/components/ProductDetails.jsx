@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../api/api"; // Import the new function
-
+import { getProductById } from "../api/api";
 const ProductDetails = ({ addToCart }) => {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
@@ -21,12 +20,18 @@ const ProductDetails = ({ addToCart }) => {
 
   if (!product) return <div>Loading...</div>;
 
+  const formattedPrice = product.price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  });
+
   return (
     <div className="details">
       <img src={product.image} alt={product.title} />
       <h2>{product.title}</h2>
       <p>{product.description}</p>
-      <p>Price: ${product.price}</p>
+      <p>{formattedPrice}</p>
       <button onClick={() => addToCart(product)}>Add to Cart</button>
     </div>
   );
